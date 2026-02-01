@@ -64,11 +64,12 @@ SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'] = timedelta(hours=1)
 SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'] = timedelta(days=7)
 
 # =============================================================================
-# THROTTLING - Disabled in development
+# THROTTLING - Relaxed in development
 # =============================================================================
 REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
     'anon': '1000/minute',
     'user': '5000/minute',
+    'auth': '100/minute',  # Relaxed for dev, strict in prod
 }
 
 print("⚠️  Running with DEVELOPMENT settings - DO NOT USE IN PRODUCTION")

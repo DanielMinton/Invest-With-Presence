@@ -6,6 +6,7 @@ from .auth import (
     ChangePasswordView,
     PasswordResetView,
     PasswordResetConfirmView,
+    HealthCheckView,
 )
 
 __all__ = [
@@ -16,4 +17,5 @@ __all__ = [
     'ChangePasswordView',
     'PasswordResetView',
     'PasswordResetConfirmView',
+    'HealthCheckView',
 ]

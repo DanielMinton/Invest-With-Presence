@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
+from django.conf import settings
 
 from bastion.api.serializers import (
     LoginSerializer,
@@ -176,3 +177,18 @@ class PasswordResetConfirmView(APIView):
         serializer.save()
 
         return Response({'detail': 'Password has been reset.'}, status=status.HTTP_200_OK)
+
+
+class HealthCheckView(APIView):
+    """
+    API health check endpoint
+    GET /api/health/
+    """
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        return Response({
+            'status': 'healthy',
+            'service': 'bastion-api',
+            'debug': settings.DEBUG,
+        }, status=status.HTTP_200_OK)
