@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
-import localFont from 'next/font/local'
+import { Inter, Playfair_Display } from 'next/font/google'
 import { SmoothScrollProvider } from '@/lib/providers/smooth-scroll'
 import '@/styles/globals.css'
 
@@ -11,28 +10,12 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-// Optional: Premium display font for headings
-const displayFont = localFont({
-  src: [
-    {
-      path: '../../public/fonts/display-medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/display-semibold.woff2',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/display-bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-display',
+// Display font for headings
+const displayFont = Playfair_Display({
+  subsets: ['latin'],
   display: 'swap',
-  fallback: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+  variable: '--font-display',
+  weight: ['500', '600', '700'],
 })
 
 // Metadata

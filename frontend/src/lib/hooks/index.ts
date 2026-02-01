@@ -1,3 +1,6 @@
+// Authentication
+export { useAuth } from './use-auth'
+
 // Device detection
 export {
   useDevice,

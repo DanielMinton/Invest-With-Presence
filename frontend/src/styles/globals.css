@@ -135,7 +135,7 @@
 
   .glow::before {
     content: '';
-    @apply absolute inset-0 -z-10 rounded-inherit;
+    @apply absolute inset-0 -z-10 rounded-2xl;
     @apply bg-gradient-to-r from-accent-400/20 to-brand-400/20;
     @apply blur-xl opacity-0 transition-opacity duration-500;
   }

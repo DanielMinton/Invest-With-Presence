@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { HubShell } from '@/components/hub/hub-shell'
+import { HubLayoutClient } from './hub-layout-client'
 
 export const metadata: Metadata = {
   title: 'Hub',
@@ -15,5 +15,5 @@ interface HubLayoutProps {
 }
 
 export default function HubLayout({ children }: HubLayoutProps) {
-  return <HubShell>{children}</HubShell>
+  return <HubLayoutClient>{children}</HubLayoutClient>
 }
