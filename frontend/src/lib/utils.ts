@@ -51,6 +51,22 @@ export function formatCompact(value: number): string {
 }
 
 /**
+ * Format date values
+ */
+export function formatDate(
+  date: string | Date,
+  options: Intl.DateTimeFormatOptions = {}
+): string {
+  const d = typeof date === 'string' ? new Date(date) : date
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    ...options,
+  }).format(d)
+}
+
+/**
  * Delay utility for animations
  */
 export function delay(ms: number): Promise<void> {

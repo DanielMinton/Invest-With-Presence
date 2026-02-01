@@ -18,26 +18,36 @@ import {
 } from 'lucide-react'
 
 // Mock data - would come from API
-const metrics = [
+type Trend = 'up' | 'down' | 'neutral'
+
+const metrics: {
+  label: string
+  value: string
+  change: number | null
+  trend: Trend
+  icon: typeof BarChart3
+  statusColor?: 'success' | 'warning' | 'danger'
+  urgent?: number
+}[] = [
   {
     label: 'Total AUM',
     value: formatCompact(45600000),
     change: 2.4,
-    trend: 'up' as const,
+    trend: 'up',
     icon: BarChart3,
   },
   {
     label: 'Active Clients',
     value: '24',
     change: 0,
-    trend: 'neutral' as const,
+    trend: 'neutral',
     icon: Users,
   },
   {
     label: 'Portfolio Risk',
     value: 'Moderate',
     change: null,
-    trend: 'neutral' as const,
+    trend: 'neutral',
     icon: Activity,
     statusColor: 'warning',
   },
@@ -45,7 +55,7 @@ const metrics = [
     label: 'Pending Tasks',
     value: '7',
     change: null,
-    trend: 'neutral' as const,
+    trend: 'neutral',
     icon: CheckSquare,
     urgent: 3,
   },

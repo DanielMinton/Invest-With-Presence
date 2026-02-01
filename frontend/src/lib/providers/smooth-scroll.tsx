@@ -46,7 +46,6 @@ export function SmoothScrollProvider({
       duration: options.duration ?? 1.2,
       easing: options.easing ?? ((t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))),
       smoothWheel: options.smoothWheel ?? true,
-      smoothTouch: options.smoothTouch ?? false, // Touch usually feels better native
       touchMultiplier: 2,
     })
 

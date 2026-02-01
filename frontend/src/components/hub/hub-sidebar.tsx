@@ -98,6 +98,12 @@ const navGroups = [
     label: 'System',
     items: [
       {
+        href: '/hub/users',
+        icon: Shield,
+        label: 'Users',
+        badge: null,
+      },
+      {
         href: '/hub/integrations',
         icon: Zap,
         label: 'Integrations',
