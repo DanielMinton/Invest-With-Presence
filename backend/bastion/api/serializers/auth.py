@@ -62,10 +62,10 @@ class LoginSerializer(serializers.Serializer):
                 'Account is temporarily locked. Please try again later.'
             )
 
-        # Authenticate
+        # Authenticate (Django uses 'username' even for email-based auth)
         user = authenticate(
             request=self.context.get('request'),
-            email=email,
+            username=email,
             password=password
         )
 
