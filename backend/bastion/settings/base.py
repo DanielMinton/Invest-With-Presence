@@ -32,6 +32,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',  # For logout support
     'corsheaders',
     'django_filters',
     'drf_spectacular',
@@ -170,10 +171,12 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.ScopedRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '20/minute',
         'user': '100/minute',
+        'auth': '5/minute',  # Strict rate limiting for auth endpoints
     },
     'EXCEPTION_HANDLER': 'bastion.api.exceptions.custom_exception_handler',
 }
