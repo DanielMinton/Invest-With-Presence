@@ -1,41 +1,86 @@
-# Dependencies
+# ======================
+# CORE: Dependencies
+# ======================
 node_modules/
 __pycache__/
 *.py[cod]
 venv/
 .venv/
 
-# Environment
-.env
-.env.local
-*.env
-
-# IDE
-.idea/
-.vscode/
-*.swp
-
-# OS
-.DS_Store
-
-# Build
+# ======================
+# CORE: Build Artifacts
+# ======================
 .next/
 dist/
 build/
 *.egg-info/
 
-# Database
+# ======================
+# CORE: Environment
+# ======================
+.env
+.env.local
+.env.*.local
+
+# ======================
+# CORE: Database
+# ======================
 *.db
 *.sqlite3
 
+# ======================
+# CORE: Testing
+# ======================
+.coverage
+.pytest_cache/
+htmlcov/
+.nyc_output/
+
+# ======================
+# CONTEXT: Design Files (raw source)
+# ======================
+*.fig
+*.sketch
+*.psd
+*.ai
+*.xd
+
+# ======================
+# CONTEXT: Personal Notes
+# ======================
+NOTES.md
+notes.txt
+scratch/
+_scratch/
+*.draft.md
+TODO.local.md
+
+# ======================
+# IDE & Editor
+# ======================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ======================
+# OS Generated
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
 # Logs
+# ======================
 *.log
 logs/
 
-# Secrets
+# ======================
+# Secrets & Keys
+# ======================
 *.pem
 *.key
-
-# Testing
-.coverage
-.pytest_cache/
+*.p12
+credentials.json
+service-account.json
