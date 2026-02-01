@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CSS Custom Properties - Design Tokens
+   ============================================ */
+:root {
+  /* Colors */
+  --color-background: 255 255 255;
+  --color-foreground: 16 42 67;
+  --color-muted: 98 125 152;
+  --color-border: 217 226 236;
+  --color-accent: 251 191 36;
+
+  /* Typography */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, sans-serif;
+
+  /* Spacing */
+  --header-height: 4rem;
+  --sidebar-width: 280px;
+  --sidebar-width-collapsed: 72px;
+
+  /* Animation */
+  --transition-fast: 150ms;
+  --transition-base: 300ms;
+  --transition-slow: 500ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgba(251, 191, 36, 0.15);
+}
+
+.dark {
+  --color-background: 10 25 41;
+  --color-foreground: 217 226 236;
+  --color-muted: 130 154 177;
+  --color-border: 51 78 104;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+@layer base {
+  * {
+    @apply border-brand-200 dark:border-brand-700;
+  }
+
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth scroll with Lenis - disable native */
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-white dark:bg-brand-950 text-brand-900 dark:text-brand-100;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-accent-400/30 text-brand-900;
+  }
+
+  /* Focus styles - accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-500 ring-offset-2 ring-offset-white dark:ring-offset-brand-950;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ============================================
+   Component Styles
+   ============================================ */
+@layer components {
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/70 dark:bg-brand-900/70 backdrop-blur-xl;
+    @apply border border-white/20 dark:border-brand-700/30;
+  }
+
+  .glass-subtle {
+    @apply bg-white/50 dark:bg-brand-900/50 backdrop-blur-md;
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-700 via-brand-600 to-accent-600;
+    @apply dark:from-brand-200 dark:via-brand-100 dark:to-accent-400;
+    @apply bg-clip-text text-transparent;
+  }
+
+  /* Glow effects */
+  .glow {
+    @apply relative;
+  }
+
+  .glow::before {
+    content: '';
+    @apply absolute inset-0 -z-10 rounded-inherit;
+    @apply bg-gradient-to-r from-accent-400/20 to-brand-400/20;
+    @apply blur-xl opacity-0 transition-opacity duration-500;
+  }
+
+  .glow:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white dark:bg-brand-900 rounded-2xl;
+    @apply border border-brand-100 dark:border-brand-800;
+    @apply shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+
+  .card-interactive {
+    @apply card cursor-pointer;
+    @apply hover:border-brand-200 dark:hover:border-brand-700;
+    @apply hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  /* Button base */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply font-medium transition-all duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    @apply disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-900 text-white hover:bg-brand-800;
+    @apply dark:bg-brand-100 dark:text-brand-900 dark:hover:bg-white;
+    @apply focus-visible:ring-brand-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-brand-100 text-brand-900 hover:bg-brand-200;
+    @apply dark:bg-brand-800 dark:text-brand-100 dark:hover:bg-brand-700;
+    @apply focus-visible:ring-brand-500;
+  }
+
+  .btn-ghost {
+    @apply btn hover:bg-brand-100 dark:hover:bg-brand-800;
+    @apply focus-visible:ring-brand-500;
+  }
+
+  .btn-accent {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600;
+    @apply focus-visible:ring-accent-500;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-2.5 rounded-lg;
+    @apply bg-white dark:bg-brand-900;
+    @apply border border-brand-200 dark:border-brand-700;
+    @apply text-brand-900 dark:text-brand-100;
+    @apply placeholder:text-brand-400 dark:placeholder:text-brand-500;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent;
+    @apply transition-all duration-200;
+  }
+
+  /* Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--color-muted) / 0.3) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-brand-300/50 dark:bg-brand-600/50 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-400/50 dark:bg-brand-500/50;
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+@layer utilities {
+  /* Hide scrollbar */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Aspect ratios */
+  .aspect-golden {
+    aspect-ratio: 1.618 / 1;
+  }
+
+  /* Animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+
+  /* Parallax helpers */
+  .parallax-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .parallax-layer {
+    will-change: transform;
+  }
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Mask gradients for scroll effects */
+  .mask-fade-y {
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+}
+
+/* ============================================
+   Animation Classes (for Framer Motion fallbacks)
+   ============================================ */
+.animate-in {
+  animation: animateIn 0.5s var(--ease-out-expo) forwards;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger children animation */
+.stagger-children > * {
+  opacity: 0;
+  animation: staggerFadeIn 0.4s var(--ease-out-expo) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+@keyframes staggerFadeIn {
+  to {
+    opacity: 1;
+  }
+}
