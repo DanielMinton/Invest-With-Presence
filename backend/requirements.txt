@@ -1,5 +1,5 @@
 # Core
-Django>=5.0,<5.1
+Django>=4.2,<5.0  # LTS version for broader compatibility
 djangorestframework>=3.14,<4.0
 django-cors-headers>=4.3,<5.0
 
